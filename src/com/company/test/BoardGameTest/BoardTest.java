@@ -12,9 +12,9 @@ public class BoardTest {
     public void shouldInit9x9Board() {
         Board game = new Board();
         String[][] expectedBoard = {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
+                {" ", " ", " "},
+                {" ", " ", " "},
+                {" ", " ", " "},
         };
         assertThat(game.getBoard(), equalTo(expectedBoard));
     }
@@ -22,7 +22,7 @@ public class BoardTest {
     @Test
     public void shouldReturnCorrectToStringBoard() {
         Board game = new Board();
-        String expectedBoard = "[null, null, null][null, null, null][null, null, null]";
+        String expectedBoard = "[ ,  ,  ]\n[ ,  ,  ]\n[ ,  ,  ]\n";
         assertThat(game.toString(), equalTo(expectedBoard));
     }
 
@@ -30,14 +30,14 @@ public class BoardTest {
     public void shouldReturnSpecificMarkForSpecificRowAndColumn() {
         Board game = new Board();
         String mark = game.getMarkAt(0,0);
-        assertThat(mark, equalTo(null));
+        assertThat(mark, equalTo(" "));
     }
 
     @Test
     public void shouldPrintBoardWithPlacedMarkWhenCalledPlaceMarkMethod() {
         Board game = new Board();
         game.placeMark('X', 0, 0);
-        String expectedBoard = "[X, null, null][null, null, null][null, null, null]";
+        String expectedBoard = "[X,  ,  ]\n[ ,  ,  ]\n[ ,  ,  ]\n";
         assertThat(game.toString(), equalTo(expectedBoard));
     }
 

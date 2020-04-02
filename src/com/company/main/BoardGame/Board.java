@@ -7,9 +7,9 @@ public class Board {
 
     public Board() {
         this.setBoard(new String[][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
+                {" ", " ", " "},
+                {" ", " ", " "},
+                {" ", " ", " "},
         });
     }
 
@@ -33,7 +33,7 @@ public class Board {
     public String toString() {
         StringBuilder boardResult = new StringBuilder();
         for(String[] i: this.board) {
-            boardResult.append(Arrays.toString(i));
+            boardResult.append(Arrays.toString(i)).append("\n");
         }
         return boardResult.toString();
     }

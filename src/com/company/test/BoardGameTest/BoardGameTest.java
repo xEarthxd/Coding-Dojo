@@ -14,7 +14,7 @@ public class BoardGameTest {
     @Test
     public void shouldCreate9x9Board() {
         BoardGame game = new BoardGame();
-        String expectedBoard = "[null, null, null][null, null, null][null, null, null]";
+        String expectedBoard = "[ ,  ,  ]\n[ ,  ,  ]\n[ ,  ,  ]\n";
         assertThat(game.printBoard(), equalTo(expectedBoard));
     }
 
@@ -37,7 +37,7 @@ public class BoardGameTest {
     public void shouldPlaceXIfSlotIsAvailable() {
         BoardGame game = new BoardGame();
         game.TakeSlot(game.getX(), 0, 0);
-        String expectedBoard = "[X, null, null][null, null, null][null, null, null]";
+        String expectedBoard = "[X,  ,  ]\n[ ,  ,  ]\n[ ,  ,  ]\n";
         assertThat(game.printBoard(), equalTo(expectedBoard));
     }
 
@@ -46,7 +46,7 @@ public class BoardGameTest {
         BoardGame game = new BoardGame();
         game.TakeSlot(game.getX(), 0, 0);
         game.TakeSlot(game.getX(), 0, 1);
-        String expectedBoard = "[X, O, null][null, null, null][null, null, null]";
+        String expectedBoard = "[X, O,  ]\n[ ,  ,  ]\n[ ,  ,  ]\n";
         assertThat(game.printBoard(), equalTo(expectedBoard));
     }
 
@@ -55,22 +55,38 @@ public class BoardGameTest {
         BoardGame game = new BoardGame();
         game.TakeSlot(game.getX(), 0, 0);
         game.TakeSlot(game.getX(), 0, 0);
-        String expectedBoard = "[X, null, null][null, null, null][null, null, null]";
+        String expectedBoard = "[X,  ,  ]\n[ ,  ,  ]\n[ ,  ,  ]\n";
         assertThat(game.printBoard(), equalTo(expectedBoard));
     }
 
     @Test
-    public void shouldReturnXifXisTheWinner() {
-        assertEquals("True", "True");
+    public void shouldReturnHorizontalWinIfPatternIsRecognized() {
+        BoardGame game = new BoardGame();
+        game.TakeSlot(true, 1, 0);
+        game.TakeSlot(true, 1, 1);
+        game.TakeSlot(true, 1, 2);
+        System.out.println(game.printBoard());
+        Boolean actual = game.getHorizontalWin();
+        assertTrue(actual);
     }
 
-    @Test
-    public void shouldReturnYifYisTheWinner() {
-        assertEquals("True", "True");
-    }
-
-    @Test
-    public void shouldReturnNullIfResultIsTie() {
-        assertEquals("True", "True");
-    }
+//    @Test
+//    public void shouldReturnXifXisTheWinner() {
+//        BoardGame game = new BoardGame();
+//        game.TakeSlot(true, 0, 0);
+//        game.TakeSlot(true, 0, 1);
+//        game.TakeSlot(true, 0, 2);
+//        String expectedResult = "X";
+//        assertThat(game.GetWinner(), equalTo(expectedResult));
+//    }
+//
+//    @Test
+//    public void shouldReturnYifYisTheWinner() {
+//        assertEquals("True", "True");
+//    }
+//
+//    @Test
+//    public void shouldReturnNullIfResultIsTie() {
+//        assertEquals("True", "True");
+//    }
 }

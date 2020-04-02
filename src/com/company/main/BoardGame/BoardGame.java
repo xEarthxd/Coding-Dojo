@@ -13,16 +13,42 @@ public class BoardGame implements IBoardGame {
 
     @Override
     public String GetWinner() {
-        return null;
+        if (this.board.getMarkAt(0, 0).equals(this.board.getMarkAt(0, 1)) && this.board.getMarkAt(0, 1).equals(this.board.getMarkAt(0, 2))) {
+            System.out.println(this.printBoard());
+            return "X";
+        } else {
+            return null;
+        }
     }
+
+    public Boolean getHorizontalWin() {
+        for (int i = 0; i < 3; i++) {
+            if ((this.board.getMarkAt(i, 0).equals(this.board.getMarkAt(i, 1))) && (this.board.getMarkAt(i, 1).equals(this.board.getMarkAt(i, 2))) && (!this.board.getMarkAt(i, 0).equals(" "))) {
+                return true;
+            }
+        } return false;
+    }
+
+    /*
+        [0][0], [0][1], [0][2]
+        [1][0], [1][1], [1][2]
+        [2][0], [2][1], [2][2]
+
+        [0][0], [1][0], [2][0]
+        [0][1], [1][1], [2][1]
+        [0][2], [1][2], [2][2]
+
+        [0][0], [1][1], [2][2]
+        [0][2], [1][1], [2][0]
+    * */
 
     @Override
     public Boolean TakeSlot(Boolean isX, Integer row, Integer column) {
-        if (isX && this.board.getMarkAt(row, column) == null) {
+        if (isX && this.board.getMarkAt(row, column) == " ") {
             this.board.placeMark('X', row, column);
             this.changePlayer();
             return true;
-        } else if (!isX && this.board.getMarkAt(row, column) == null) {
+        } else if (!isX && this.board.getMarkAt(row, column) == " ") {
             this.board.placeMark('O', row, column);
             this.changePlayer();
             return true;
