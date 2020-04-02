@@ -5,6 +5,7 @@ public class BoardGame implements IBoardGame {
     private Integer row;
     private Integer column;
     private Board board;
+    private String winner;
 
     public BoardGame() {
         this.setBoard(new Board());;
@@ -13,9 +14,9 @@ public class BoardGame implements IBoardGame {
 
     @Override
     public String GetWinner() {
-        if (this.board.getMarkAt(0, 0).equals(this.board.getMarkAt(0, 1)) && this.board.getMarkAt(0, 1).equals(this.board.getMarkAt(0, 2))) {
+        if (this.getHorizontalWin() || this.getVerticalWin() || this.getDiagonalWin()) {
             System.out.println(this.printBoard());
-            return "X";
+            return this.winner;
         } else {
             return null;
         }
@@ -24,8 +25,29 @@ public class BoardGame implements IBoardGame {
     public Boolean getHorizontalWin() {
         for (int i = 0; i < 3; i++) {
             if ((this.board.getMarkAt(i, 0).equals(this.board.getMarkAt(i, 1))) && (this.board.getMarkAt(i, 1).equals(this.board.getMarkAt(i, 2))) && (!this.board.getMarkAt(i, 0).equals(" "))) {
+                this.winner = this.board.getMarkAt(i, 0);
                 return true;
             }
+        } return false;
+    }
+
+    public Boolean getVerticalWin() {
+        for (int i = 0; i < 3; i++) {
+            if ((this.board.getMarkAt(0, i).equals(this.board.getMarkAt(1, i))) && (this.board.getMarkAt(1, i).equals(this.board.getMarkAt(2, i))) && (!this.board.getMarkAt(0, i).equals(" "))) {
+                this.winner = this.board.getMarkAt(0, i);
+                return true;
+            }
+        } return false;
+    }
+
+    public Boolean getDiagonalWin() {
+        if ((this.board.getMarkAt(0, 0).equals(this.board.getMarkAt(1, 1))) && (this.board.getMarkAt(1, 1).equals(this.board.getMarkAt(2, 2))) && (!this.board.getMarkAt(0, 0).equals(" "))) {
+            this.winner = this.board.getMarkAt(0, 0);
+            return true;
+        }
+        if ((this.board.getMarkAt(0, 2).equals(this.board.getMarkAt(1, 1))) && (this.board.getMarkAt(1, 1).equals(this.board.getMarkAt(2, 0))) && (!this.board.getMarkAt(0, 2).equals(" "))) {
+            this.winner = this.board.getMarkAt(0, 2);
+            return true;
         } return false;
     }
 
@@ -61,32 +83,12 @@ public class BoardGame implements IBoardGame {
         this.setX(!this.isX);
     }
 
-    /*
-        Getter / Setter Section
-    */
-
     public Boolean getX() {
         return isX;
     }
 
     public void setX(Boolean x) {
         isX = x;
-    }
-
-    public Integer getRow() {
-        return row;
-    }
-
-    public void setRow(Integer row) {
-        this.row = row;
-    }
-
-    public Integer getColumn() {
-        return column;
-    }
-
-    public void setColumn(Integer column) {
-        this.column = column;
     }
 
     public void setBoard(Board board) {

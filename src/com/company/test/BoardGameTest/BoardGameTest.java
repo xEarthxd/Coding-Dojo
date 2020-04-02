@@ -4,7 +4,6 @@ import com.company.main.BoardGame.BoardGame;
 import org.junit.Test;
 
 import static junit.framework.Assert.assertTrue;
-import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertFalse;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -70,23 +69,85 @@ public class BoardGameTest {
         assertTrue(actual);
     }
 
-//    @Test
-//    public void shouldReturnXifXisTheWinner() {
-//        BoardGame game = new BoardGame();
-//        game.TakeSlot(true, 0, 0);
-//        game.TakeSlot(true, 0, 1);
-//        game.TakeSlot(true, 0, 2);
-//        String expectedResult = "X";
-//        assertThat(game.GetWinner(), equalTo(expectedResult));
-//    }
-//
-//    @Test
-//    public void shouldReturnYifYisTheWinner() {
-//        assertEquals("True", "True");
-//    }
-//
-//    @Test
-//    public void shouldReturnNullIfResultIsTie() {
-//        assertEquals("True", "True");
-//    }
+    @Test
+    public void shouldReturnXifXWinsHorizontally() {
+        BoardGame game = new BoardGame();
+        game.TakeSlot(true, 0, 0);
+        game.TakeSlot(true, 0, 1);
+        game.TakeSlot(true, 0, 2);
+        String expectedResult = "X";
+        assertThat(game.GetWinner(), equalTo(expectedResult));
+    }
+
+    @Test
+    public void shouldReturnOifOWinsHorizontally() {
+        BoardGame game = new BoardGame();
+        game.TakeSlot(false, 0, 0);
+        game.TakeSlot(false, 0, 1);
+        game.TakeSlot(false, 0, 2);
+        String expectedResult = "O";
+        assertThat(game.GetWinner(), equalTo(expectedResult));
+    }
+
+    @Test
+    public void shouldReturnVerticalWinIfPatternIsRecognized() {
+        BoardGame game = new BoardGame();
+        game.TakeSlot(true, 0, 0);
+        game.TakeSlot(true, 1, 0);
+        game.TakeSlot(true, 2, 0);
+        System.out.println(game.printBoard());
+        Boolean actual = game.getVerticalWin();
+        assertTrue(actual);
+    }
+
+    @Test
+    public void shouldReturnXifXWinsVertically() {
+        BoardGame game = new BoardGame();
+        game.TakeSlot(true, 0, 0);
+        game.TakeSlot(true, 1, 0);
+        game.TakeSlot(true, 2, 0);
+        String expectedResult = "X";
+        assertThat(game.GetWinner(), equalTo(expectedResult));
+    }
+
+    @Test
+    public void shouldReturnOifOWinsVertically() {
+        BoardGame game = new BoardGame();
+        game.TakeSlot(false, 0, 0);
+        game.TakeSlot(false, 1, 0);
+        game.TakeSlot(false, 2, 0);
+        String expectedResult = "O";
+        assertThat(game.GetWinner(), equalTo(expectedResult));
+    }
+
+    @Test
+    public void shouldReturnDiagonalWinIfPatternIsRecognized() {
+        BoardGame game = new BoardGame();
+        game.TakeSlot(true, 0, 0);
+        game.TakeSlot(true, 1, 1);
+        game.TakeSlot(true, 2, 2);
+        System.out.println(game.printBoard());
+        Boolean actual = game.getDiagonalWin();
+        assertTrue(actual);
+    }
+
+    @Test
+    public void shouldReturnXifXWinsDiagonally() {
+        BoardGame game = new BoardGame();
+        game.TakeSlot(true, 0, 0);
+        game.TakeSlot(true, 1, 1);
+        game.TakeSlot(true, 2, 2);
+        String expectedResult = "X";
+        assertThat(game.GetWinner(), equalTo(expectedResult));
+    }
+
+    @Test
+    public void shouldReturnOifOWinsDiagonally() {
+        BoardGame game = new BoardGame();
+        game.TakeSlot(false, 0, 0);
+        game.TakeSlot(false, 1, 1);
+        game.TakeSlot(false, 2, 2);
+        String expectedResult = "O";
+        assertThat(game.GetWinner(), equalTo(expectedResult));
+    }
 }
