@@ -25,4 +25,12 @@ public class BoardTest {
         String expectedBoard = "[null, null, null][null, null, null][null, null, null]";
         assertThat(game.toString(), equalTo(expectedBoard));
     }
+
+    @Test
+    public void shouldPrintBoardWithPlacedMarkWhenCalledPlaceMarkMethod() {
+        Board game = new Board();
+        game.placeMark('X', 0, 0);
+        String expectedBoard = "[X, null, null][null, null, null][null, null, null]";
+        assertThat(game.toString(), equalTo(expectedBoard));
+    }
 }

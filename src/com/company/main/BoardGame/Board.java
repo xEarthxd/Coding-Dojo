@@ -21,6 +21,10 @@ public class Board {
         this.board = board;
     }
 
+    public void placeMark(Character input, Integer row, Integer column) {
+        this.board[row][column] = String.valueOf(input);
+    }
+
     @Override
     public String toString() {
         StringBuilder boardResult = new StringBuilder();
