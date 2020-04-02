@@ -1,20 +1,13 @@
 package com.company.main.BoardGame;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class BoardGame implements IBoardGame {
     private Boolean isX;
     private Integer row;
     private Integer column;
-    private String[][] board;
+    private Board board;
 
     public BoardGame() {
-        this.setBoard(new String[][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-        });
+        this.setBoard(new Board());;
         this.setX(true);
     }
 
@@ -24,20 +17,13 @@ public class BoardGame implements IBoardGame {
     }
 
     @Override
-    public Boolean TakeSlot() {
-        return null;
+    public Boolean TakeSlot(Boolean isX, Integer row, Integer column) {
+        return true;
     }
 
     /*
         Getter / Setter Section
     */
-    public void setBoard(String[][] board) {
-        this.board = board;
-    }
-
-    public String[][] getBoard() {
-        return board;
-    }
 
     public Boolean getX() {
         return isX;
@@ -61,5 +47,17 @@ public class BoardGame implements IBoardGame {
 
     public void setColumn(Integer column) {
         this.column = column;
+    }
+
+    public void setBoard(Board board) {
+        this.board = board;
+    }
+
+    public Board getBoard() {
+        return board;
+    }
+
+    public String printBoard() {
+        return this.getBoard().toString();
     }
 }
