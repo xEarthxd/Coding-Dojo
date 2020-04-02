@@ -13,16 +13,20 @@ public class Board {
         });
     }
 
+    public String getMarkAt(int row, int column) {
+        return this.board[row][column];
+    }
+
+    public void placeMark(Character input, Integer row, Integer column) {
+        this.board[row][column] = String.valueOf(input);
+    }
+
     public String[][] getBoard() {
         return board;
     }
 
     public void setBoard(String[][] board) {
         this.board = board;
-    }
-
-    public void placeMark(Character input, Integer row, Integer column) {
-        this.board[row][column] = String.valueOf(input);
     }
 
     @Override

@@ -18,7 +18,21 @@ public class BoardGame implements IBoardGame {
 
     @Override
     public Boolean TakeSlot(Boolean isX, Integer row, Integer column) {
-        return true;
+        if (isX && this.board.getMarkAt(row, column) == null) {
+            this.board.placeMark('X', row, column);
+            this.changePlayer();
+            return true;
+        } else if (!isX && this.board.getMarkAt(row, column) == null) {
+            this.board.placeMark('O', row, column);
+            this.changePlayer();
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public void changePlayer() {
+        this.setX(!this.isX);
     }
 
     /*

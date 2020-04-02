@@ -27,10 +27,26 @@ public class BoardTest {
     }
 
     @Test
+    public void shouldReturnSpecificMarkForSpecificRowAndColumn() {
+        Board game = new Board();
+        String mark = game.getMarkAt(0,0);
+        assertThat(mark, equalTo(null));
+    }
+
+    @Test
     public void shouldPrintBoardWithPlacedMarkWhenCalledPlaceMarkMethod() {
         Board game = new Board();
         game.placeMark('X', 0, 0);
         String expectedBoard = "[X, null, null][null, null, null][null, null, null]";
         assertThat(game.toString(), equalTo(expectedBoard));
+    }
+
+    @Test
+    public void shouldBeAbleToGetXMarkAfterPlacingIt() {
+        Board game = new Board();
+        game.placeMark('X', 0, 0);
+        String mark = game.getMarkAt(0, 0);
+        String expected = "X";
+        assertThat(mark, equalTo(expected));
     }
 }
