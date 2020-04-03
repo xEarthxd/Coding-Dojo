@@ -2,21 +2,19 @@ package com.company.main.BoardGame;
 
 public class BoardGame implements IBoardGame {
     private Boolean isX;
-    private Integer row;
-    private Integer column;
     private Board board;
     private String winner;
+    private int turn;
 
     public BoardGame() {
-        this.setBoard(new Board());;
-        this.setX(true);
+        setBoard(new Board());;
+        setX(true);
     }
 
     @Override
     public String GetWinner() {
-        if (this.getHorizontalWin() || this.getVerticalWin() || this.getDiagonalWin()) {
-            System.out.println(this.printBoard());
-            return this.winner;
+        if (getHorizontalWin() || getVerticalWin() || getDiagonalWin()) {
+            return winner;
         } else {
             return null;
         }
@@ -24,8 +22,8 @@ public class BoardGame implements IBoardGame {
 
     public Boolean getHorizontalWin() {
         for (int i = 0; i < 3; i++) {
-            if ((this.board.getMarkAt(i, 0).equals(this.board.getMarkAt(i, 1))) && (this.board.getMarkAt(i, 1).equals(this.board.getMarkAt(i, 2))) && (!this.board.getMarkAt(i, 0).equals(" "))) {
-                this.winner = this.board.getMarkAt(i, 0);
+            if ((board.getMarkAt(i, 0).equals(board.getMarkAt(i, 1))) && (board.getMarkAt(i, 1).equals(board.getMarkAt(i, 2))) && (!board.getMarkAt(i, 0).equals(" "))) {
+                winner = board.getMarkAt(i, 0);
                 return true;
             }
         } return false;
@@ -33,46 +31,33 @@ public class BoardGame implements IBoardGame {
 
     public Boolean getVerticalWin() {
         for (int i = 0; i < 3; i++) {
-            if ((this.board.getMarkAt(0, i).equals(this.board.getMarkAt(1, i))) && (this.board.getMarkAt(1, i).equals(this.board.getMarkAt(2, i))) && (!this.board.getMarkAt(0, i).equals(" "))) {
-                this.winner = this.board.getMarkAt(0, i);
+            if ((board.getMarkAt(0, i).equals(board.getMarkAt(1, i))) && (board.getMarkAt(1, i).equals(board.getMarkAt(2, i))) && (!board.getMarkAt(0, i).equals(" "))) {
+                winner = board.getMarkAt(0, i);
                 return true;
             }
         } return false;
     }
 
     public Boolean getDiagonalWin() {
-        if ((this.board.getMarkAt(0, 0).equals(this.board.getMarkAt(1, 1))) && (this.board.getMarkAt(1, 1).equals(this.board.getMarkAt(2, 2))) && (!this.board.getMarkAt(0, 0).equals(" "))) {
-            this.winner = this.board.getMarkAt(0, 0);
+        if ((board.getMarkAt(0, 0).equals(board.getMarkAt(1, 1))) && (board.getMarkAt(1, 1).equals(board.getMarkAt(2, 2))) && (!board.getMarkAt(0, 0).equals(" "))) {
+            winner = board.getMarkAt(0, 0);
             return true;
         }
-        if ((this.board.getMarkAt(0, 2).equals(this.board.getMarkAt(1, 1))) && (this.board.getMarkAt(1, 1).equals(this.board.getMarkAt(2, 0))) && (!this.board.getMarkAt(0, 2).equals(" "))) {
-            this.winner = this.board.getMarkAt(0, 2);
+        if ((board.getMarkAt(0, 2).equals(board.getMarkAt(1, 1))) && (board.getMarkAt(1, 1).equals(board.getMarkAt(2, 0))) && (!board.getMarkAt(0, 2).equals(" "))) {
+            winner = board.getMarkAt(0, 2);
             return true;
         } return false;
     }
 
-    /*
-        [0][0], [0][1], [0][2]
-        [1][0], [1][1], [1][2]
-        [2][0], [2][1], [2][2]
-
-        [0][0], [1][0], [2][0]
-        [0][1], [1][1], [2][1]
-        [0][2], [1][2], [2][2]
-
-        [0][0], [1][1], [2][2]
-        [0][2], [1][1], [2][0]
-    * */
-
     @Override
     public Boolean TakeSlot(Boolean isX, Integer row, Integer column) {
-        if (isX && this.board.getMarkAt(row, column) == " ") {
-            this.board.placeMark('X', row, column);
-            this.changePlayer();
+        if (isX && board.getMarkAt(row, column) == " ") {
+            board.placeMark('X', row, column);
+            changePlayer();
             return true;
-        } else if (!isX && this.board.getMarkAt(row, column) == " ") {
-            this.board.placeMark('O', row, column);
-            this.changePlayer();
+        } else if (!isX && board.getMarkAt(row, column) == " ") {
+            board.placeMark('O', row, column);
+            changePlayer();
             return true;
         } else {
             return false;
@@ -80,7 +65,7 @@ public class BoardGame implements IBoardGame {
     }
 
     public void changePlayer() {
-        this.setX(!this.isX);
+        setX(!isX);
     }
 
     public Boolean getX() {
@@ -101,5 +86,13 @@ public class BoardGame implements IBoardGame {
 
     public String printBoard() {
         return this.getBoard().toString();
+    }
+
+    public int getTurn() {
+        return turn;
+    }
+
+    public void setTurn(int turn) {
+        this.turn = turn;
     }
 }
